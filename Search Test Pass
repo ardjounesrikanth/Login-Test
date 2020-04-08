@@ -1,0 +1,100 @@
+
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.testng.annotations.*;
+import static org.testng.Assert.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Profile2 {
+  private WebDriver driver;
+  private String baseUrl;
+  private boolean acceptNextAlert = true;
+  private StringBuffer verificationErrors = new StringBuffer();
+
+  @BeforeClass(alwaysRun = true)
+  public void setUp() throws Exception {
+    driver = new FirefoxDriver();
+    baseUrl = "https://www.google.com/";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  }
+
+  @Test
+  public void testProfile2() throws Exception {
+    driver.get("https://demo.clickdoc.de/cd-de/search");
+    driver.findElement(By.id("search-query-typeahead")).click();
+    driver.findElement(By.id("search-query-typeahead")).clear();
+    driver.findElement(By.id("search-query-typeahead")).sendKeys("Beate");
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div/app-filter/div/div/div[2]/div[6]/div/button")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[3]/div/div")).click();
+    driver.findElement(By.linkText("Mehr anzeigen")).click();
+    driver.findElement(By.id("search-location-typeahead")).click();
+    driver.findElement(By.id("search-query-typeahead")).click();
+    driver.findElement(By.id("search-query-typeahead")).clear();
+    driver.findElement(By.id("search-query-typeahead")).sendKeys("Beate Edel");
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div/app-filter/div/div/div[2]/div[6]/div/button")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div/app-filter/div/div/div[2]/div[6]/div/button")).click();
+    driver.findElement(By.id("search-location-typeahead")).click();
+    driver.findElement(By.id("search-location-typeahead")).clear();
+    driver.findElement(By.id("search-location-typeahead")).sendKeys("565");
+    driver.findElement(By.id("search-location-typeahead")).click();
+    driver.findElement(By.id("search-location-typeahead")).clear();
+    driver.findElement(By.id("search-location-typeahead")).sendKeys("56567");
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div/app-filter/div/div/div[2]/div[2]/div/div/div/typeahead-container/button[2]/span")).click();
+    driver.findElement(By.id("search-query-typeahead")).click();
+    driver.findElement(By.id("search-query-typeahead")).clear();
+    driver.findElement(By.id("search-query-typeahead")).sendKeys("");
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div/app-filter/div/div/div[2]/div[6]/div/button")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div[2]/app-sort/div/div/div[3]/div/div/label")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div[2]/app-sort/div/div/div[3]/div/div/div/div/div[2]/div/label")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div[2]/app-sort/div/div/div[3]/div/div/div/div/div/div/label")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div[2]/app-sort/div/div/div[3]/div/div/div/div/div[2]/div/label")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div")).click();
+    driver.findElement(By.xpath("//div[@id='search']/div/div[2]/div[2]/div[2]/app-sort/div/div/div[5]/div")).click();
+    driver.findElement(By.xpath("//a/div/span")).click();
+    driver.findElement(By.xpath("//a[2]/div/span[2]")).click();
+  }
+
+  @AfterClass(alwaysRun = true)
+  public void tearDown() throws Exception {
+    driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
+    }
+  }
+
+  private boolean isElementPresent(By by) {
+    try {
+      driver.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  private boolean isAlertPresent() {
+    try {
+      driver.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  private String closeAlertAndGetItsText() {
+    try {
+      Alert alert = driver.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
+  }
+}
